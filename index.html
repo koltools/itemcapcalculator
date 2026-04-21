@@ -1,0 +1,35 @@
+<html>
+  <head>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+      jQuery(document).ready(function() {
+         jQuery('#drop_btn').bind('click', function() {
+            jQuery('#result').html('');
+            let monster_base = parseInt(jQuery('#drop_rate').val());
+            for (let a = 100; a > 0; a--) {
+               jQuery('#result').append(jQuery("<tr><td>" + a + "%</td><td style='text-align: right'>" + calculate_drop(monster_base, a) + "%</td></tr>"));
+            }
+         });
+      });
+
+      function calculate_drop(orig, amt) {
+         if (orig >= 100) return 0;
+         return (100 * ((amt / orig) - 1)).toFixed(2);
+      }
+    </script>
+  </head>
+  <body>
+      <div>
+           <input type="text" size="3" id="drop_rate"> <input type="button" id="drop_btn" value="Calculate" default="default">
+      </div>
+      <div>
+         <table border="1" style="border-collapse: collapse;">
+            <thead>
+              <tr><th>Drop %</th><th>+Item %</th></tr>
+            </thead>
+            <tbody id="result">
+            </tbody>
+         </table>
+      </div>
+  </body>
+</html>
